@@ -33,13 +33,15 @@ def distance_traveled(v0: Q[u.m/u.s], a: Q[u.m/u.s**2], t: Q[u.s]) -> Q[u.m]:
     Quantity['length']
         Displacement computed from $v_0 t + \frac{1}{2} a t^2$.
     """
-    raise NotImplementedError("Implement distance_traveled")
+    #raise NotImplementedError("Implement distance_traveled")
+    return v0*t - 0.5*a*t**2.0
 
 
 def kinetic_energy(m: Q[u.kg], v: Q[u.m/u.s]) -> Q[u.J]:
     """Return the kinetic energy of an object.
     """
-    raise NotImplementedError("Implement kinetic_energy")
+    #raise NotImplementedError("Implement kinetic_energy")
+    return 0.5*m*v**2.0
 
 
 def free_fall_height(
@@ -50,7 +52,8 @@ def free_fall_height(
 ) -> Q[u.m]:
     """Return the height of an object in vertical motion.
     """
-    raise NotImplementedError("Implement free_fall_height")
+    #raise NotImplementedError("Implement free_fall_height")
+    return y0 - v0*t - 0.5*g*t**2.0
 
 
 
