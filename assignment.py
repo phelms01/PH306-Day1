@@ -32,15 +32,31 @@ def distance_traveled(v0: Q[u.m/u.s], a: Q[u.m/u.s**2], t: Q[u.s]) -> Q[u.m]:
     -------
     Quantity['length']
         Displacement computed from $v_0 t + \frac{1}{2} a t^2$.
-    """
-    #raise NotImplementedError("Implement distance_traveled")
-    return v0*t - 0.5*a*t**2.0
+    """    
+    return v0*t + 0.5*a*t**2.0
 
 
 def kinetic_energy(m: Q[u.kg], v: Q[u.m/u.s]) -> Q[u.J]:
-    """Return the kinetic energy of an object.
+    """Returns the kinetic energy of a kinematic object.
+
+    Parameters
+    ----------
+    m : Q[u.kg]
+        Mass in kilograms (kg).
+    v : Q[u.m/u.s]
+        Velocity in m/s.
+
+    Returns
+    -------
+    Q[u.J]
+        Kinetic energy (J).
+
+    Examples
+    --------
+    FIXME: Add docs.
+
     """
-    #raise NotImplementedError("Implement kinetic_energy")
+    
     return 0.5*m*v**2.0
 
 
@@ -50,20 +66,80 @@ def free_fall_height(
     v0: Q[u.m/u.s] = u.Quantity(0.0, u.m / u.s),
     g: Q[u.m/u.s**2] = EARTH_GRAVITY,
 ) -> Q[u.m]:
-    """Return the height of an object in vertical motion.
+    """Returns the height of an object in free fall at a point in time.
+
+    Parameters
+    ----------
+    y0 : Q[u.m]
+        Initial height (m).
+    t : Q[u.s]
+        Time (s).
+    v0 : Q[u.m/u.s]
+        Initial velocity (m/s).
+    g : Q[u.m/u.s**2]
+        Gravitational constant (m/s^2).
+
+    Returns
+    -------
+    Q[u.m]
+        Height (m).
+
+    Examples
+    --------
+    FIXME: Add docs.
+
     """
-    #raise NotImplementedError("Implement free_fall_height")
+
     return y0 - v0*t - 0.5*g*t**2.0
 
 
 
-def projectile_range(v0, th0, g = EARTH_GRAVITY):
-    """Return the ideal range of a projectile launched and landing at the same height.
+def projectile_range(v0: Q[u.m/u.s], th0: Q[u.deg], g : Q[u.m/u.s**2] = EARTH_GRAVITY) -> Q[u.m]:    
+    """Return the horizontal range of an object following a ballistic trajectory, assuming the start and end heights are equal.
+
+    Parameters
+    ----------
+    v0 : Quantity['velocity']
+        Initial velocity of object.
+    th0 : Quantity['angle']
+        Initial angle of trajectory relative to the horizon.
+    g : Quantity['acceleration']
+        Gravitational acceleration constant.
+
+    Returns
+    -------
+    Quantity[u.m]
+        Horizontal range in meters.
+
+    Examples
+    --------
+    FIXME: Add docs.
+
     """
-    raise NotImplementedError("Implement projectile_range")
+    return (v0**2.0*np.sin(2.0*th0))/g    
 
 
-def quadratic_solver(a: float, b, c) -> tuple[float, float]:
-    """Return the two roots of a quadratic equation.
+def quadratic_solver(a: float, b: float, c: float) -> tuple[float, float]:    
+    """Solves the quadratic equation and returns both roots in a tuple using the plus-minus convention.
+    $ ax^2+bx+c=0 $
+
+    Parameters
+    ----------
+    a : float
+        A coefficient of quadratic equation.
+    b : float
+        B coefficient of quadratic equation.
+    c : float
+        C coefficient of quadratic equation.
+
+    Returns
+    -------
+    tuple[float, float]
+        Roots of quadratic equation.
+
+    Examples
+    --------
+    FIXME: Add docs.
+
     """
-    raise NotImplementedError("Implement quadratic_solver")
+    return ((-b + np.sqrt(b**2.0 - 4.0*a*c))/(2.0*a), (-b - np.sqrt(b**2.0 - 4.0*a*c))/(2.0*a))
